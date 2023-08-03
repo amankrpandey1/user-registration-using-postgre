@@ -6,6 +6,10 @@ from db import create_postgres_connection
 
 app = FastAPI()
 
+@app.get('/')
+def home():
+    return {"message":"go to /user end point"}
+
 connection = create_postgres_connection()
 
 def check_email_exists_in_postgres(email):
@@ -61,7 +65,7 @@ def register_user(full_name: str, email: str, password: str, phone: str, profile
 
     return {"message": "User registered successfully", "user_id": user_id}
 
-@app.get('/users/')
+@app.get('/user/')
 def get_all_users():
     try:
         connection = create_postgres_connection()
